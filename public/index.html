@@ -54,27 +54,62 @@
         .button:active {
             transform: scale(0.95); /* Efecto de movimiento al hacer clic */
         }
-        select {
-            padding: 10px;
-            margin: 20px; /* Aumentar el margen para separar el select */
-            border-radius: 5px;
-            border: 1px solid #00aaff; /* Borde azul */
-            background-color: #333; /* Fondo del select */
-            color: white; /* Texto blanco */
-            z-index: 2; /* Asegura que el select esté por encima del overlay */
-            position: relative; /* Para el posicionamiento del select */
-        }
         .info {
             margin-top: 10px;
             color: #b300b3; /* Púrpura */
             z-index: 2; /* Asegura que el texto esté por encima del overlay */
             position: relative; /* Para el posicionamiento del texto */
+            display: none; /* Ocultar inicialmente */
+            animation: fadeIn 0.5s; /* Animación de aparición */
         }
         .header-image {
             max-width: 100%; /* Asegura que la imagen no exceda el ancho de la pantalla */
             height: auto; /* Mantiene la proporción de la imagen */
             z-index: 2; /* Asegura que la imagen esté por encima del overlay */
             position: relative; /* Para el posicionamiento de la imagen */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .dropdown {
+            display: none; /* Ocultar inicialmente */
+            margin-top: 10px;
+            text-align: left; /* Alinear texto a la izquierda */
+            position: relative; /* Para el posicionamiento del dropdown */
+            z-index: 2; /* Asegura que el dropdown esté por encima del overlay */
+        }
+        .dropdown button {
+            display: block; /* Mostrar como bloque */
+            margin: 5px auto; /* Centrar y separar */
+            background-color: #333; /* Color de fondo de los botones de la lista */
+            color: white; /* Texto blanco */
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 200px; /* Ancho fijo para los botones de la lista */
+            transition: background-color 0.3s; /* Efecto de transición */
+        }
+        .dropdown button:hover {
+            background-color: #555; /* Color más claro al pasar el mouse */
+        }
+        .command-button {
+            background-color: #000; /* Negro */
+            color: white; /* Texto blanco */
+            border: none;
+            padding: 15px 30px;
+            margin: 20px; /* Margen para separar del resto */
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s, background-color 0.3s; /* Efecto de movimiento */
+            z-index: 2; /* Asegura que el botón esté por encima del overlay */
+            position: relative; /* Para el posicionamiento del botón */
+        }
+        .command-button:hover {
+            background-color: #444; /* Gris oscuro al pasar el mouse */
         }
     </style>
 </head>
@@ -101,6 +136,8 @@
     </div>
     
     <div id="texto" class="info"></div>
+
+    <button class="command-button" onclick="toggleDropdown()">Lista de comandos</button>
 
     <script>
         function toggleDropdown() {
