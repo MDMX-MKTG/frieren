@@ -85,7 +85,9 @@
     <p>Gracias por visitar esta pagina, puedes seguir los enlaces de abajo.</p>
     <a href="https://github.com/MDMX-MKTG/home" class="button">GitHub</a>
     <a href="https://wa.me/5493873655168" class="button">WhatsApp</a> <!-- Cambia el número por el tuyo -->
-        <div id="botones-container">
+    <button class="button" onclick="toggleDropdown()">Mostrar Opciones</button>
+    
+    <div id="dropdown" class="dropdown">
         <button class="button" onclick="mostrarTexto(1)">Opción 1</button>
         <button class="button" onclick="mostrarTexto(2)">Opción 2</button>
         <button class="button" onclick="mostrarTexto(3)">Opción 3</button>
@@ -97,9 +99,15 @@
         <button class="button" onclick="mostrarTexto(9)">Opción 9</button>
         <button class="button" onclick="mostrarTexto(10)">Opción 10</button>
     </div>
+    
     <div id="texto" class="info"></div>
 
     <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdown");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block"; // Alternar visibilidad
+        }
+
         function mostrarTexto(opcion) {
             const textoDiv = document.getElementById("texto");
             textoDiv.style.display = "block"; // Muestra el div de texto
