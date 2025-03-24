@@ -6,17 +6,32 @@
     <title>Página de Bienvenida</title>
     <style>
         body {
-            background-color: #1a1a1a; /* Fondo negro */
+            background: url('https://i.postimg.cc/nLbfYMjj/09bf0827d6ab00356c7d6449abbb189d.gif') no-repeat center center fixed; /* Fondo GIF */
+            background-size: cover; /* Asegura que el fondo cubra toda la pantalla */
             color: #ffffff; /* Texto blanco */
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
+            position: relative; /* Para el posicionamiento del overlay */
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semi transparente */
+            z-index: 1; /* Asegura que el overlay esté por encima del fondo */
         }
         h1 {
             color: #00aaff; /* Azul */
+            z-index: 2; /* Asegura que el texto esté por encima del overlay */
+            position: relative; /* Para el posicionamiento del texto */
         }
         p {
             color: #b300b3; /* Púrpura */
+            z-index: 2; /* Asegura que el texto esté por encima del overlay */
+            position: relative; /* Para el posicionamiento del texto */
         }
         .button {
             background-color: #00aaff; /* Azul */
@@ -29,16 +44,85 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
+            z-index: 2; /* Asegura que el botón esté por encima del overlay */
+            position: relative; /* Para el posicionamiento del botón */
         }
         .button:hover {
             background-color: #0077cc; /* Azul más oscuro al pasar el mouse */
         }
+        select {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #00aaff; /* Borde azul */
+            background-color: #333; /* Fondo del select */
+            color: white; /* Texto blanco */
+            z-index: 2; /* Asegura que el select esté por encima del overlay */
+            position: relative; /* Para el posicionamiento del select */
+        }
+        .info {
+            margin-top: 10px;
+            color: #b300b3; /* Púrpura */
+            z-index: 2; /* Asegura que el texto esté por encima del overlay */
+            position: relative; /* Para el posicionamiento del texto */
+        }
+        .header-image {
+            max-width: 100%; /* Asegura que la imagen no exceda el ancho de la pantalla */
+            height: auto; /* Mantiene la proporción de la imagen */
+            z-index: 2; /* Asegura que la imagen esté por encima del overlay */
+            position: relative; /* Para el posicionamiento de la imagen */
+        }
     </style>
 </head>
 <body>
+    <div class="overlay"></div> <!-- Overlay semi oscuro -->
+    <img src="https://i.postimg.cc/0rRhGBrg/Picsart-25-03-24-03-00-38-501.png" alt="Imagen de Bienvenida" class="header-image"> <!-- Imagen de bienvenida -->
     <h1>¡Bienvenido a Nuestra Página!</h1>
     <p>Estamos encantados de tenerte aquí. Explora y disfruta de nuestro contenido.</p>
-    <a href="https://github.com/MDMX-MKTG" class="button">GitHub</a>
+    <a href="https://github.com/MDMX-MKTG/home" class="button">GitHub</a>
     <a href="https://wa.me/5493873655168" class="button">WhatsApp</a> <!-- Cambia el número por el tuyo -->
+    
+    <div>
+        <select id="lista" onchange="mostrarBoton()">
+            <option value="">Selecciona una opción</option>
+            <option value="prueba1">Prueba</option>
+            <option value="prueba2">Prueba2</option>
+            <option value="prueba3">Prueba3</option>
+            <option value="prueba4">Prueba4</option>
+            <option value="prueba5">Prueba5</option>
+        </select>
+        <button class="button" id="mostrarTexto" style="display:none;" onclick="toggleTexto()">Mostrar/Ocultar Texto</button>
+    </div>
+
+    <div id="texto" class="info" style="display:none;"></div>
+
+    <script>
+        function mostrarBoton() {
+            const select = document.getElementById('lista');
+            const boton = document.getElementById('mostrarTexto');
+            boton.style.display = select.value ? 'inline-block' : 'none';
+            document.getElementById('texto').style.display = 'none'; // Ocultar texto al cambiar la selección
+        }
+
+        function toggleTexto() {
+            const select = document.getElementById('lista');
+            const textoDiv = document.getElementById('texto');
+            const valorSeleccionado = select.value;
+
+            if (valorSeleccionado) {
+                const textos = {
+                    prueba1: "Texto de prueba para Prueba.",
+                    prueba2: "Texto de prueba para Prueba2.",
+                    prueba3: "Texto de prueba para Prueba3.",
+                    prueba4: "Texto de prueba para Prueba4.",
+                    prueba5: "Texto de prueba para Prueba5."
+                };
+
+                textoDiv.innerText = textos[valorSeleccionado];
+                textoDiv.style.display = textoDiv.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+    </script>
 </body>
-</html>
+            </html>
+            
