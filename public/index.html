@@ -24,7 +24,8 @@
             z-index: 1; /* Asegura que el overlay esté por encima del fondo */
         }
         h1 {
-            color: #00aaff; /* Azul */
+            color: #39ff14; /* Verde neón */
+            text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14; /* Efecto de neón */
             z-index: 2; /* Asegura que el texto esté por encima del overlay */
             position: relative; /* Para el posicionamiento del texto */
         }
@@ -34,25 +35,28 @@
             position: relative; /* Para el posicionamiento del texto */
         }
         .button {
-            background-color: #00aaff; /* Azul */
+            background-color: #007bff; /* Azul */
             color: white;
             border: none;
             padding: 15px 30px;
-            margin: 10px;
+            margin: 20px; /* Aumentar el margen para separar los botones */
             text-decoration: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s;
+            transition: transform 0.2s, background-color 0.3s; /* Efecto de movimiento */
             z-index: 2; /* Asegura que el botón esté por encima del overlay */
             position: relative; /* Para el posicionamiento del botón */
         }
         .button:hover {
-            background-color: #0077cc; /* Azul más oscuro al pasar el mouse */
+            background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+        }
+        .button:active {
+            transform: scale(0.95); /* Efecto de movimiento al hacer clic */
         }
         select {
             padding: 10px;
-            margin: 10px;
+            margin: 20px; /* Aumentar el margen para separar el select */
             border-radius: 5px;
             border: 1px solid #00aaff; /* Borde azul */
             background-color: #333; /* Fondo del select */
@@ -77,21 +81,21 @@
 <body>
     <div class="overlay"></div> <!-- Overlay semi oscuro -->
     <img src="https://i.postimg.cc/0rRhGBrg/Picsart-25-03-24-03-00-38-501.png" alt="Imagen de Bienvenida" class="header-image"> <!-- Imagen de bienvenida -->
-    <h1>¡Bienvenido a Nuestra Página!</h1>
-    <p>Estamos encantados de tenerte aquí. Explora y disfruta de nuestro contenido.</p>
+    <h1>¡Hola, sea bienvenido!</h1>
+    <p>Gracias por visitar esta pagina, puedes seguir los enlaces de abajo.</p>
     <a href="https://github.com/MDMX-MKTG/home" class="button">GitHub</a>
     <a href="https://wa.me/5493873655168" class="button">WhatsApp</a> <!-- Cambia el número por el tuyo -->
     
-    <div>
+  <div>
         <select id="lista" onchange="mostrarBoton()">
-            <option value="">Selecciona una opción</option>
-            <option value="prueba1">Prueba</option>
-            <option value="prueba2">Prueba2</option>
-            <option value="prueba3">Prueba3</option>
-            <option value="prueba4">Prueba4</option>
-            <option value="prueba5">Prueba5</option>
+            <option value="">Ver lista de comandos</option>
+            <option value="prueba1">#menu</option>
+            <option value="prueba2">#stat</option>
+            <option value="prueba3">#infobot</option>
+            <option value="prueba4">#imagine</option>
+            <option value="prueba5">#play</option>
         </select>
-        <button class="button" id="mostrarTexto" style="display:none;" onclick="toggleTexto()">Mostrar/Ocultar Texto</button>
+        <button class="button" id="boton" style="display:none;">click aqui</button>
     </div>
 
     <div id="texto" class="info" style="display:none;"></div>
@@ -99,7 +103,7 @@
     <script>
         function mostrarBoton() {
             const select = document.getElementById('lista');
-            const boton = document.getElementById('mostrarTexto');
+            const boton = document.getElementById('click aqui');
             boton.style.display = select.value ? 'inline-block' : 'none';
             document.getElementById('texto').style.display = 'none'; // Ocultar texto al cambiar la selección
         }
@@ -111,11 +115,11 @@
 
             if (valorSeleccionado) {
                 const textos = {
-                    prueba1: "Texto de prueba para Prueba.",
-                    prueba2: "Texto de prueba para Prueba2.",
-                    prueba3: "Texto de prueba para Prueba3.",
-                    prueba4: "Texto de prueba para Prueba4.",
-                    prueba5: "Texto de prueba para Prueba5."
+                    prueba1: "Este comando muestra todos los comandos del bot.",
+                    prueba2: "Este comando muestra el estado actual del bot.",
+                    prueba3: "Este comando muestra la información del bot.",
+                    prueba4: "Este comando puede generar imagenes a tu solicitud.",
+                    prueba5: "Este comando puede descargar musicas o videos con un texto o enlace."
                 };
 
                 textoDiv.innerText = textos[valorSeleccionado];
@@ -124,5 +128,4 @@
         }
     </script>
 </body>
-            </html>
-            
+    </html>
