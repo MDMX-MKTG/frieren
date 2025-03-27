@@ -4,159 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Bienvenida</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
+            background-color: white;
+            color: black;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             transition: background-color 0.5s, color 0.5s;
         }
-        .light-theme {
-            background-color: white;
-            color: black;
-        }
-        .dark-theme {
-            background-color: black;
-            color: white;
-        }
-        #header {
-            position: relative;
-            padding: 20px;
-        }
-        #theme-toggle {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            cursor: pointer;
-            font-size: 24px;
-        }
-        #welcome {
-            text-align: center;
+        .welcome {
             font-size: 2.5em;
-            margin: 20px 0;
-            animation: shine 1s infinite;
-        }
-        @keyframes shine {
-            0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
-            50% { text-shadow: 0 0 20px rgba(255, 255, 255, 1); }
-            100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
-        }
-        #buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        .button {
-            flex: 1;
-            padding: 15px;
-            border: 2px solid;
-            cursor: pointer;
             text-align: center;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .light-theme .button {
-            border-color: black;
-            background-color: white;
-            color: black;
-        }
-        .dark-theme .button {
-            border-color: white;
-            background-color: black;
-            color: white;
-        }
-        #commands {
-            border: 2px solid;
-            margin: 20px;
+            margin-top: 20%;
+            animation: move 2s infinite alternate;
+            border: 5px solid transparent;
+            border-radius: 10px;
             padding: 10px;
             transition: border-color 0.5s;
         }
-        .light-theme #commands {
-            border-color: black;
+        .message {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
         }
-        .dark-theme #commands {
-            border-color: white;
-        }
-        .command {
-            display: flex;
-            justify-content: space-between;
-            padding: 5px 0;
-        }
-        .view-button {
-            cursor: pointer;
-            padding: 5px 10px;
-            border: none;
-            color: inherit;
-            background-color: inherit;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .light-theme .view-button {
-            border: 1px solid black;
-        }
-        .dark-theme .view-button {
-            border: 1px solid white;
-        }
-        .balloon {
+        .button {
             position: absolute;
-            background-color: inherit;
-            color: inherit;
-            border: 1px solid;
-            padding: 10px;
-            border-radius: 5px;
-            display: none;
-            transition: opacity 0.5s;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+        .button:hover {
+            transform: scale(1.1);
+        }
+        @keyframes move {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+        .dark-mode .welcome {
+            border-color: white;
         }
     </style>
 </head>
-<body class="light-theme">
-    <div id="header">
-        <div id="theme-toggle">☀️</div>
-        <div id="welcome">¡¡BIENVENIDO!!</div>
-        <div>Gracias por visitar nuestra página, esperamos y disfrutes estando aquí.</div>
-    </div>
-    <div id="buttons">
-        <div class="button" onclick="window.open('https://wa.me/', '_blank')">WhatsApp</div>
-        <div class="button" onclick="window.open('https://t.me/', '_blank')">Telegram</div>
-        <div class="button" onclick="window.open('https://www.paypal.com/', '_blank')">PayPal</div>
-        <div class="button" onclick="window.open('https://github.com/', '_blank')">GitHub</div>
-    </div>
-    <div id="commands">
-        <div><strong>COMANDOS</strong></div>
-        <div>______________________</div>
-        <div class="command">
-            <span>#comando <span> | texto | </span>
-            <button class="view-button" onclick="showBalloon('Descripción del comando 1')">ver</button>
-        </div>
-        <div class="command">
-            <span>#comando2 | texto2 | </span>
-            <button class="view-button" onclick="showBalloon('Descripción del comando 2')">ver</button>
-        </div>
-        <div class="command">
-            <span>#comando3 | texto3 | </span>
-            <button class="view-button" onclick="showBalloon('Descripción del comando 3')">ver</button>
-        </div>
-    </div>
-    <div class="balloon" id="balloon"></div>
+<body>
+
+    <button class="button" id="toggleButton"><i class="fas fa-sun"></i></button>
+    
+    <div class="welcome" id="welcomeText">¡Bienvenido a nuestra página!</div>
+    <div class="message">Gracias por visitar nuestra página, esperamos y estés cómodo.</div>
+
     <script>
-        const themeToggle = document.getElementById('theme-toggle');
+        const button = document.getElementById('toggleButton');
         const body = document.body;
-        let isDarkTheme = false;
+        const welcomeText = document.getElementById('welcomeText');
 
-        themeToggle.onclick = () => {
-            isDarkTheme = !isDarkTheme;
-            body.className = isDarkTheme ? 'dark-theme' : 'light-theme';
-        };
-
-        function showBalloon(message) {
-            const balloon = document.getElementById('balloon');
-            balloon.innerText = message;
-            balloon.style.display = 'block';
-            balloon.style.top = `${Math.random() * (window.innerHeight - 50)}px`;
-            balloon.style.left = `${Math.random() * (window.innerWidth - 150)}px`;
-            setTimeout(() => {
-                balloon.style.display = 'none';
-            }, 5000);
-        }
+        button.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                button.innerHTML = '<i class="fas fa-moon"></i>'; // Cambia el icono a luna
+            } else {
+                button.innerHTML = '<i class="fas fa-sun"></i>'; // Cambia el icono a sol
+            }
+        });
     </script>
+
 </body>
 </html>
