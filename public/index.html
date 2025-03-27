@@ -56,6 +56,10 @@
             padding: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .dark-theme .sidebar {
+            background-color: rgba(0, 0, 0, 0.9);
+            border-color: white;
+        }
         .sidebar h3 {
             margin: 0 0 10px;
             font-size: 20px;
@@ -69,8 +73,26 @@
             color: inherit;
             transition: background-color 0.3s;
         }
-        .sidebar a:hover {
+        .light-theme .sidebar a:hover {
             background-color: #f0f0f0;
+        }
+        .dark-theme .sidebar a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .submenu {
+            display: none;
+            margin-left: 20px;
+            padding-left: 10px;
+            border-left: 2px solid;
+        }
+        .light-theme .submenu {
+            border-color: black;
+        }
+        .dark-theme .submenu {
+            border-color: white;
+        }
+        .submenu a {
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -85,14 +107,46 @@
 
     <div class="sidebar" id="sidebar">
         <h3>HERRAMIENTAS</h3>
-        <a href="#asistencia" class="button">Asistencia</a>
-        <a href="#comandos" class="button">Comandos</a>
-        <a href="#grupos" class="button">Grupos</a>
-        <a href="#canales" class="button">Canales</a>
-        <a href="#bots" class="button">Bots</a>
-        <a href="#ventas" class="button">Ventas</a>
-        <a href="#premium" class="button">Premium</a>
-        <a href="#otros" class="button">Otros</a>
+        <a href="#" onclick="toggleSubmenu('asistenciaSubmenu')">Asistencia</a>
+        <div class="submenu" id="asistenciaSubmenu">
+            <a href="#asistencia1" class="button">Asistencia 1</a>
+            <a href="#asistencia2" class="button">Asistencia 2</a>
+        </div>
+        <a href="#" onclick="toggleSubmenu('comandosSubmenu')">Comandos</a>
+        <div class="submenu" id="comandosSubmenu">
+            <a href="#comando1" class="button">Comando 1</a>
+            <a href="#comando2" class="button">Comando 2</a>
+        </div>
+        <a href="#" onclick="toggleSubmenu('gruposSubmenu') ">Grupos</a>
+        <div class="submenu" id="gruposSubmenu">
+            <a href="#grupo1" class="button">Grupo 1</a>
+            <a href="#grupo2" class="button">Grupo 2</a>
+        </div>
+        <a href="#" onclick="toggleSubmenu('canalesSubmenu')">Canales</a>
+        <div class="submenu" id="canalesSubmenu">
+            <a href="#canal1" class="button">Canal 1</a>
+            <a href="#canal2" class="button">Canal 2</a>
+        </div>
+        <a href="#" onclick="toggleSubmenu('botsSubmenu')">Bots</a>
+        <div class="submenu" id="botsSubmenu">
+            <a href="#bot1" class="button">Bot 1</a>
+            <a href="#bot2" class="button">Bot 2</a>
+        </div>
+        <a href="#" onclick="toggleSubmenu('ventasSubmenu')">Ventas</a>
+        <div class="submenu" id="ventasSubmenu">
+            <a href="#venta1" class="button">Venta 1</a>
+            <a href="#venta2" class="button">Venta 2</a>
+        </div>
+        <a href="#" onclick="toggleSubmenu('premiumSubmenu')">Premium</a>
+        <div class="submenu" id="premiumSubmenu">
+            <a href="#premium1" class="button">Premium 1</a>
+            <a href="#premium2" class="button">Premium 2</a>
+        </div>
+        <a href="#" onclick="toggleSubmenu('otrosSubmenu')">Otros</a>
+        <div class="submenu" id="otrosSubmenu">
+            <a href="#otro1" class="button">Otro 1</a>
+            <a href="#otro2" class="button">Otro 2</a>
+        </div>
     </div>
 
     <a href="https://github.com" class="button" target="_blank">
@@ -117,8 +171,13 @@
 
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
-            sidebar.style.display = sidebar .style.display === 'block' ? 'none' : 'block';
+            sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleSubmenu(submenuId) {
+            const submenu = document.getElementById(submenuId);
+            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
         }
     </script>
 </body>
-        </html>
+            </html>
