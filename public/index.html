@@ -11,16 +11,14 @@
             color: black;
             font-family: Arial, sans-serif;
             transition: background-color 0.5s, color 0.5s;
+            overflow: hidden; /* Evita el scroll */
         }
         .welcome {
-            font-size: 2.5em;
+            font-size: 3em;
             text-align: center;
-            margin-top: 20%;
-            animation: move 2s infinite alternate;
-            border: 5px solid transparent;
-            border-radius: 10px;
-            padding: 10px;
-            transition: border-color 0.5s;
+            margin-top: 40%;
+            animation: float 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
         }
         .message {
             text-align: center;
@@ -35,21 +33,23 @@
             border: none;
             cursor: pointer;
             font-size: 24px;
+            color: black; /* Color por defecto */
             transition: transform 0.3s;
         }
         .button:hover {
             transform: scale(1.1);
         }
-        @keyframes move {
+        @keyframes float {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
         }
         .dark-mode {
             background-color: black;
             color: white;
         }
-        .dark-mode .welcome {
-            border-color: white;
+        .dark-mode .button {
+            color: white; /* Cambia el color del icono a blanco en modo oscuro */
         }
     </style>
 </head>
@@ -63,7 +63,6 @@
     <script>
         const button = document.getElementById('toggleButton');
         const body = document.body;
-        const welcomeText = document.getElementById('welcomeText');
 
         button.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
