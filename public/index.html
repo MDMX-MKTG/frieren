@@ -19,54 +19,63 @@
             background-color: black;
             color: white;
         }
+        #header {
+            position: relative;
+            padding: 20px;
+        }
         #theme-toggle {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 20px;
+            left: 20px;
             cursor: pointer;
             font-size: 24px;
-            background: none;
-            border: none;
         }
-        h1 {
+        #welcome {
             text-align: center;
-            font-size: 3em;
-            animation: shine 1.5s infinite;
+            font-size: 2.5em;
+            margin: 20px 0;
+            animation: shine 1s infinite;
         }
         @keyframes shine {
             0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
             50% { text-shadow: 0 0 20px rgba(255, 255, 255, 1); }
             100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
         }
+        #buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
         .button {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
+            flex: 1;
             padding: 15px;
-            border: none;
-            border-radius: 25px;
-            font-size: 18px;
+            border: 2px solid;
             cursor: pointer;
+            text-align: center;
             transition: background-color 0.3s, color 0.3s;
         }
         .light-theme .button {
-            background-color: black;
-            color: white;
-        }
-        .dark-theme .button {
+            border-color: black;
             background-color: white;
             color: black;
         }
-        .commands {
-            width: 300px;
-            margin: 20px auto;
-            border: 1px solid black;
-            border-radius: 10px;
-            padding: 10px;
+        .dark-theme .button {
+            border-color: white;
+            background-color: black;
+            color: white;
         }
-        .commands h2 {
-            text-align: center;
-            margin: 0;
+        #commands {
+            border: 2px solid;
+            margin: 20px;
+            padding: 10px;
+            transition: border-color 0.5s;
+        }
+        .light-theme #commands {
+            border-color: black;
+        }
+        .dark-theme #commands {
+            border-color: white;
         }
         .command {
             display: flex;
@@ -77,77 +86,77 @@
             cursor: pointer;
             padding: 5px 10px;
             border: none;
-            border-radius: 5px;
+            color: inherit;
+            background-color: inherit;
             transition: background-color 0.3s, color 0.3s;
         }
         .light-theme .view-button {
-            background-color: black;
-            color: white;
+            border: 1px solid black;
         }
         .dark-theme .view-button {
-            background-color: white;
-            color: black;
+            border: 1px solid white;
         }
-        .chat-bubble {
-            display: none;
+        .balloon {
             position: absolute;
+            background-color: inherit;
+            color: inherit;
+            border: 1px solid;
             padding: 10px;
-            border-radius: 10px;
-            transition: opacity 0.3s;
+            border-radius: 5px;
+            display: none;
+            transition: opacity 0.5s;
         }
     </style>
 </head>
 <body class="light-theme">
-    <button id="theme-toggle">☀️</button>
-    <h1>¡¡BIENVENIDO!!</h1>
-    <p style="text-align: center;">Gracias por visitar nuestra página, esperamos y disfrutes estando aquí.</p>
-
-    <a href="https://wa.me/" class="button">WhatsApp</a>
-    <a href="https://telegram.me/" class="button">Telegram</a>
-    <a href="https://www.paypal.com/" class="button">PayPal</a>
-    <a href="https://github.com/" class="button">GitHub</a>
-
-    <div class="commands">
-        <h2>COMANDOS</h2>
-        <hr>
+    <div id="header">
+        <div id="theme-toggle">☀️</div>
+        <div id="welcome">¡¡BIENVENIDO!!</div>
+        <div>Gracias por visitar nuestra página, esperamos y disfrutes estando aquí.</div>
+    </div>
+    <div id="buttons">
+        <div class="button" onclick="window.open('https://wa.me/', '_blank')">WhatsApp</div>
+        <div class="button" onclick="window.open('https://t.me/', '_blank')">Telegram</div>
+        <div class="button" onclick="window.open('https://www.paypal.com/', '_blank')">PayPal</div>
+        <div class="button" onclick="window.open('https://github.com/', '_blank')">GitHub</div>
+    </div>
+    <div id="commands">
+        <div><strong>COMANDOS</strong></div>
+        <div>______________________</div>
         <div class="command">
-            <span>#comando</span>
-            <button class="view-button" onclick="showChat('Descripción del comando')">ver</button>
+            <span>#comando <span> | texto | </span>
+            <button class="view-button" onclick="showBalloon('Descripción del comando 1')">ver</button>
         </div>
         <div class="command">
-            <span>#comando2</span>
-            <button class="view-button" onclick="showChat('Descripción del comando 2')">ver</button>
+            <span>#comando2 | texto2 | </span>
+            <button class="view-button" onclick="showBalloon('Descripción del comando 2')">ver</button>
         </div>
         <div class="command">
-            <span>#comando3</span>
-            <button class="view-button" onclick="showChat('Descripción del comando 3')">ver</ button>
+            <span>#comando3 | texto3 | </span>
+            <button class="view-button" onclick="showBalloon('Descripción del comando 3')">ver</button>
         </div>
     </div>
-
-    <div id="chat-bubble" class="chat-bubble"></div>
-
+    <div class="balloon" id="balloon"></div>
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
-        const chatBubble = document.getElementById('chat-bubble');
+        let isDarkTheme = false;
 
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-theme');
-            body.classList.toggle('light-theme');
-            themeToggle.textContent = body.classList.contains('dark-theme') ? '🌙' : '☀️';
-        });
+        themeToggle.onclick = () => {
+            isDarkTheme = !isDarkTheme;
+            body.className = isDarkTheme ? 'dark-theme' : 'light-theme';
+        };
 
-        function showChat(message) {
-            chatBubble.textContent = message;
-            chatBubble.style.display = 'block';
-            chatBubble.style.opacity = '1';
+        function showBalloon(message) {
+            const balloon = document.getElementById('balloon');
+            balloon.innerText = message;
+            balloon.style.display = 'block';
+            balloon.style.top = `${Math.random() * (window.innerHeight - 50)}px`;
+            balloon.style.left = `${Math.random() * (window.innerWidth - 150)}px`;
             setTimeout(() => {
-                chatBubble.style.opacity = '0';
-                setTimeout(() => {
-                    chatBubble.style.display = 'none';
-                }, 300);
-            }, 2000);
+                balloon.style.display = 'none';
+            }, 5000);
         }
     </script>
 </body>
-    </html>
+</html>
